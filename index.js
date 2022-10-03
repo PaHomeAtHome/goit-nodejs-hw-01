@@ -24,6 +24,4 @@ function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-// contacts.addContact("Allen", "sasadsad@mail.com", "3123213312");
-
 invokeAction(argv);
