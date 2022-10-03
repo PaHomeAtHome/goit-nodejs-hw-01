@@ -12,7 +12,7 @@ function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case "add":
-      // ... name email phone
+      contacts.addContact(name, email, phone);
       break;
 
     case "remove":
@@ -23,5 +23,7 @@ function invokeAction({ action, id, name, email, phone }) {
       console.warn("\x1B[31m Unknown action type!");
   }
 }
+
+// contacts.addContact("Allen", "sasadsad@mail.com", "3123213312");
 
 invokeAction(argv);

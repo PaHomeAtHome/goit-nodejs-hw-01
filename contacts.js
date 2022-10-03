@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 const contactsPath = path.resolve("db/contacts.json");
+const { v4: uuidv4 } = require("uuid");
 const testPath = path.resolve("contactsTest/contacts.json");
 
 function listContacts() {
@@ -45,7 +46,26 @@ function removeContact(contactId) {
 }
 
 function addContact(name, email, phone) {
-  // ...твій код
+  fs.readFile(testPath)
+    .then((data) => {
+      const parsedData = JSON.parse(data);
+      if (
+        parsedData.find(
+          (contact) => contact.name.toLowerCase() === name.toLowerCase()
+        )
+      ) {
+        console.log(`${name} is already in contacts`);
+        return;
+      }
+
+      parsedData.push({ id: uuidv4(), name, email, phone });
+      fs.writeFile(testPath, JSON.stringify(parsedData)).then(
+        console.log(`${name} is added to contacts`)
+      );
+      return;
+    })
+
+    .catch((err) => console.log(err.message));
 }
 
 module.exports = { listContacts, getContactById, removeContact, addContact };
